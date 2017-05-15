@@ -7,7 +7,7 @@
 3.可以使用image或颜色做导航栏背景
 
  ![](https://github.com/smlkts/MDNavigationBar/raw/master/01.gif) 
- ![](https://github.com/smlkts/MDNavigationBar/raw/master/01.gif)
+ ![](https://github.com/smlkts/MDNavigationBar/raw/master/02.gif)
 
  - 用法
 ```objective-c
