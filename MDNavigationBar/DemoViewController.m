@@ -21,14 +21,13 @@ static NSString * const reuse = @"cell";
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.navigationItem.prompt = @"prompt";
+//    self.navigationItem.prompt = @"prompt";
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:reuse];
     self.tableView.rowHeight = 60;
-    UILabel *header = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 250)];
-    header.text = @"header";
-    header.textAlignment = NSTextAlignmentCenter;
-    header.backgroundColor = [UIColor orangeColor];
+    UIImageView *header = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 250)];
+    header.image = [UIImage imageNamed:@"rio.jpg"];
+    header.contentMode = UIViewContentModeScaleAspectFill;
     self.tableView.tableHeaderView = header;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -46,8 +45,8 @@ static NSString * const reuse = @"cell";
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navigationBarBackgroundImage = [UIImage imageNamed:@"750"];
-//    self.navigationBarBackgroundColor = [UIColor cyanColor];
+//    self.navigationBarBackgroundImage = [UIImage imageNamed:@"750"];
+    self.navigationBarBackgroundColor = [UIColor cyanColor];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

@@ -13,6 +13,8 @@
 
 @dynamic navigationBarBackgroundColor, navigationBarBackgroundImage;
 
+#pragma mark - NavigationBarBackgroundImageView
+
 static void *backgroundImageViewKey = &backgroundImageViewKey;
 
 - (UIImageView *)backgroundImageView{
@@ -23,7 +25,7 @@ static void *backgroundImageViewKey = &backgroundImageViewKey;
     objc_setAssociatedObject(self, backgroundImageViewKey, backgroundImageView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-#pragma mark -
+#pragma mark - NavigationBarBackgroundColor
 
 static void *colorKey = &colorKey;
 
@@ -49,7 +51,7 @@ static void *colorKey = &colorKey;
     [self fd_layoutSubviews];
 }
 
-#pragma mark -
+#pragma mark - NavigationBarBackgroundImage
 
 static void *imageKey = &imageKey;
 
@@ -80,16 +82,22 @@ static void *imageKey = &imageKey;
     self.backgroundImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.navigationController.navigationBar.bounds), navigationBarHeight + statusBarHeight);
 }
 
+#pragma mark - Set NavigationBar Alpha
+
 - (void)fd_setNavigationBarAlpha:(CGFloat)alpha{
     self.navigationController.navigationBar.shadowImage = alpha < 0.5? [[UIImage alloc] init]: nil;
     self.backgroundImageView.alpha = alpha;
 }
+
+#pragma mark - Reset NavigationBar to default
 
 - (void)fd_recoverNavigationBar{
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = nil;
     [self.backgroundImageView removeFromSuperview];
 }
+
+#pragma mark - 
 
 - (void)fd_fadeWithOffset:(CGFloat)offset threshold:(CGFloat)threshold headerHeight:(CGFloat)headerHeight{
     if (offset > threshold) {
