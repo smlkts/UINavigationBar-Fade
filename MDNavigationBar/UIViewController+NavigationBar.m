@@ -11,47 +11,84 @@
 
 @implementation UIViewController (NavigationBar)
 
-#pragma mark -
+@dynamic navigationBarBackgroundColor, navigationBarBackgroundImage;
 
-static void *overlayKey = &overlayKey;
+static void *backgroundImageViewKey = &backgroundImageViewKey;
 
-- (UIView *)overlay{
-    return objc_getAssociatedObject(self, overlayKey);
+- (UIImageView *)backgroundImageView{
+    return objc_getAssociatedObject(self, backgroundImageViewKey);
 }
 
-- (void)setOverlay:(UIView *)overlay{
-    objc_setAssociatedObject(self, overlayKey, overlay, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setBackgroundImageView:(UIImageView *)backgroundImageView{
+    objc_setAssociatedObject(self, backgroundImageViewKey, backgroundImageView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark -
 
-- (void)fd_setNavigationBarColor:(UIColor *)color{
-    if (!self.overlay) {
+static void *colorKey = &colorKey;
+
+- (UIColor *)navigationBarBackgroundColor{
+    return objc_getAssociatedObject(self, colorKey);
+}
+
+- (void)setNavigationBarBackgroundColor:(UIColor *)navigationBarBackgroundColor{
+    if (self.navigationBarBackgroundColor == nil) {
+        objc_setAssociatedObject(self, colorKey, navigationBarBackgroundColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        self.backgroundImageView = [[UIImageView alloc] init];
+        self.backgroundImageView.userInteractionEnabled = NO;
         CGFloat statusBarHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
         CGFloat navigationBarHeight = CGRectGetHeight(self.navigationController.navigationBar.bounds);
-        UIView *overlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.navigationController.navigationBar.bounds), navigationBarHeight + statusBarHeight)];
-        overlay.userInteractionEnabled = NO;
-        overlay.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        //        overlay.backgroundColor = [color colorWithAlphaComponent:0];
-        overlay.alpha = 0;
-        overlay.backgroundColor = color;
-        self.overlay = overlay;
+        self.backgroundImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.navigationController.navigationBar.bounds), navigationBarHeight + statusBarHeight);
+        self.backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.backgroundImageView.alpha = 0;
+        self.backgroundImageView.backgroundColor = navigationBarBackgroundColor;
     }
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = self.overlay.alpha<0.5? [[UIImage alloc] init]: nil;
-    [[self.navigationController.navigationBar.subviews firstObject] insertSubview:self.overlay atIndex:0];
+    self.navigationController.navigationBar.shadowImage = self.backgroundImageView.alpha<0.5? [[UIImage alloc] init]: nil;
+    [[self.navigationController.navigationBar.subviews firstObject] insertSubview:self.backgroundImageView atIndex:0];
+    [self fd_layoutSubviews];
+}
+
+#pragma mark -
+
+static void *imageKey = &imageKey;
+
+- (UIImage *)navigationBarBackgroundImage{
+    return objc_getAssociatedObject(self, imageKey);
+}
+
+- (void)setNavigationBarBackgroundImage:(UIImage *)navigationBarBackgroundImage{
+    if (self.navigationBarBackgroundImage == nil) {
+        objc_setAssociatedObject(self, imageKey, navigationBarBackgroundImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        self.backgroundImageView = [[UIImageView alloc] init];
+        self.backgroundImageView.userInteractionEnabled = NO;
+        self.backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.backgroundImageView.alpha = 0;
+        self.backgroundImageView.image = navigationBarBackgroundImage;
+    }
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = self.backgroundImageView.alpha<0.5? [[UIImage alloc] init]: nil;
+    [[self.navigationController.navigationBar.subviews firstObject] insertSubview:self.backgroundImageView atIndex:0];
+    [self fd_layoutSubviews];
+}
+
+#pragma mark -
+
+- (void)fd_layoutSubviews{
+    CGFloat statusBarHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
+    CGFloat navigationBarHeight = CGRectGetHeight(self.navigationController.navigationBar.bounds);
+    self.backgroundImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.navigationController.navigationBar.bounds), navigationBarHeight + statusBarHeight);
 }
 
 - (void)fd_setNavigationBarAlpha:(CGFloat)alpha{
     self.navigationController.navigationBar.shadowImage = alpha < 0.5? [[UIImage alloc] init]: nil;
-    self.overlay.alpha = alpha;
-    //    self.overlay.backgroundColor = [self.overlay.backgroundColor colorWithAlphaComponent:alpha];
+    self.backgroundImageView.alpha = alpha;
 }
 
 - (void)fd_recoverNavigationBar{
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = nil;
-    [self.overlay removeFromSuperview];
+    [self.backgroundImageView removeFromSuperview];
 }
 
 - (void)fd_fadeWithOffset:(CGFloat)offset threshold:(CGFloat)threshold headerHeight:(CGFloat)headerHeight{

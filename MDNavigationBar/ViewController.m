@@ -19,7 +19,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.title = @"点击空白push到下一个页面";
-    self.navigationItem.prompt = @"如果存在我prompt";
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

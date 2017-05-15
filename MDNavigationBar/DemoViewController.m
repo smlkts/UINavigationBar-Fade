@@ -21,12 +21,12 @@ static NSString * const reuse = @"cell";
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.navigationItem.prompt = @"我是prompt";
+    self.navigationItem.prompt = @"prompt";
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:reuse];
     self.tableView.rowHeight = 60;
     UILabel *header = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 250)];
-    header.text = @"我是header";
+    header.text = @"header";
     header.textAlignment = NSTextAlignmentCenter;
     header.backgroundColor = [UIColor orangeColor];
     self.tableView.tableHeaderView = header;
@@ -46,7 +46,8 @@ static NSString * const reuse = @"cell";
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self fd_setNavigationBarColor:[UIColor cyanColor]];
+    self.navigationBarBackgroundImage = [UIImage imageNamed:@"750"];
+//    self.navigationBarBackgroundColor = [UIColor cyanColor];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -73,7 +74,7 @@ static NSString * const reuse = @"cell";
         
         //顺便把标题隐藏/显示
         if (alpha == 1.f) {
-            self.navigationItem.title = @"标题不隐藏了";
+            self.navigationItem.title = @"Title";
         }else{
             self.navigationItem.title = @"";
         }
@@ -107,9 +108,14 @@ static NSString * const reuse = @"cell";
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    UIViewController *vc = [[UIViewController alloc] init];
+    vc.view.backgroundColor = [UIColor redColor];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:; forIndexPath:indexPath];
     
     // Configure the cell...
     

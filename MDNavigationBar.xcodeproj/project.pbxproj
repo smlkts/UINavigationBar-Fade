@@ -15,6 +15,7 @@
 		10792CE61EC067920007E7E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10792CE41EC067920007E7E8 /* LaunchScreen.storyboard */; };
 		10792CEF1EC068080007E7E8 /* UIViewController+NavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 10792CEE1EC068080007E7E8 /* UIViewController+NavigationBar.m */; };
 		10792CF21EC068590007E7E8 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10792CF11EC068590007E7E8 /* DemoViewController.m */; };
+		10D811BB1EC5B03A00E175D9 /* 750.png in Resources */ = {isa = PBXBuildFile; fileRef = 10D811BA1EC5B03A00E175D9 /* 750.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		10792CEE1EC068080007E7E8 /* UIViewController+NavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NavigationBar.m"; sourceTree = "<group>"; };
 		10792CF01EC068590007E7E8 /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		10792CF11EC068590007E7E8 /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
+		10D811BA1EC5B03A00E175D9 /* 750.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 750.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 			children = (
 				10792CD91EC067920007E7E8 /* AppDelegate.h */,
 				10792CDA1EC067920007E7E8 /* AppDelegate.m */,
+				10D811BA1EC5B03A00E175D9 /* 750.png */,
 				10792CED1EC068080007E7E8 /* UIViewController+NavigationBar.h */,
 				10792CEE1EC068080007E7E8 /* UIViewController+NavigationBar.m */,
 				10792CDC1EC067920007E7E8 /* ViewController.h */,
@@ -120,6 +123,7 @@
 				TargetAttributes = {
 					10792CD21EC067920007E7E8 = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = X4AQERS7MH;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -150,6 +154,7 @@
 				10792CE61EC067920007E7E8 /* LaunchScreen.storyboard in Resources */,
 				10792CE31EC067920007E7E8 /* Assets.xcassets in Resources */,
 				10792CE11EC067920007E7E8 /* Main.storyboard in Resources */,
+				10D811BB1EC5B03A00E175D9 /* 750.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,9 +291,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = X4AQERS7MH;
 				INFOPLIST_FILE = MDNavigationBar/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.MDNavigationBar;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.-.bar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -297,9 +304,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = X4AQERS7MH;
 				INFOPLIST_FILE = MDNavigationBar/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.MDNavigationBar;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.-.bar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

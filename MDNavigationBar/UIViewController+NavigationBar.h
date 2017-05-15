@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface UIViewController (NavigationBar)
-- (void)fd_setNavigationBarColor:(UIColor *)color;///<初始化设置当前导航栏需要渐隐的背景颜色 同时将背景设置为透明
+@property (nonatomic, strong) UIImage *navigationBarBackgroundImage;
+@property (nonatomic, strong) UIColor *navigationBarBackgroundColor;
+//- (void)fd_setNavigationBarColor:(UIColor *)color;///<初始化设置当前导航栏需要渐隐的背景颜色 同时将背景设置为透明
 - (void)fd_setNavigationBarAlpha:(CGFloat)alpha;///<设置背景的透明度
 - (void)fd_recoverNavigationBar;///<还原导航栏
 /**
