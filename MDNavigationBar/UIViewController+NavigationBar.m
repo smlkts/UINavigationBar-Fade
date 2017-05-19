@@ -18,7 +18,15 @@
 static void *backgroundImageViewKey = &backgroundImageViewKey;
 
 - (UIImageView *)backgroundImageView{
-    return objc_getAssociatedObject(self, backgroundImageViewKey);
+    UIImageView *iv = objc_getAssociatedObject(self, backgroundImageViewKey);
+    if (iv == nil) {
+        iv = [[UIImageView alloc] init];
+        iv.userInteractionEnabled = NO;
+        iv.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        iv.alpha = 0;
+        [self setBackgroundImageView:iv];
+    }
+    return iv;
 }
 
 - (void)setBackgroundImageView:(UIImageView *)backgroundImageView{
@@ -36,13 +44,6 @@ static void *colorKey = &colorKey;
 - (void)setNavigationBarBackgroundColor:(UIColor *)navigationBarBackgroundColor{
     if (self.navigationBarBackgroundColor == nil) {
         objc_setAssociatedObject(self, colorKey, navigationBarBackgroundColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        self.backgroundImageView = [[UIImageView alloc] init];
-        self.backgroundImageView.userInteractionEnabled = NO;
-        CGFloat statusBarHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
-        CGFloat navigationBarHeight = CGRectGetHeight(self.navigationController.navigationBar.bounds);
-        self.backgroundImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.navigationController.navigationBar.bounds), navigationBarHeight + statusBarHeight);
-        self.backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.backgroundImageView.alpha = 0;
         self.backgroundImageView.backgroundColor = navigationBarBackgroundColor;
     }
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
@@ -62,10 +63,6 @@ static void *imageKey = &imageKey;
 - (void)setNavigationBarBackgroundImage:(UIImage *)navigationBarBackgroundImage{
     if (self.navigationBarBackgroundImage == nil) {
         objc_setAssociatedObject(self, imageKey, navigationBarBackgroundImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        self.backgroundImageView = [[UIImageView alloc] init];
-        self.backgroundImageView.userInteractionEnabled = NO;
-        self.backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.backgroundImageView.alpha = 0;
         self.backgroundImageView.image = navigationBarBackgroundImage;
     }
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
